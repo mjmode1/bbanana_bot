@@ -1,13 +1,23 @@
-import os
 import discord
-from dotenv import load_dotenv
+import os
 
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+
 client = discord.Client()
+
 
 @client.event
 async def on_ready():
-    print(f'{client.user} has connected to Discord!')
+    print("login")
+    print(client.user.name)
+    print(client.user.id)
+    print("-------------")
+    await client.change_presence(game=discord.Game(name='', type=1))
 
-client.run(TOKEN)
+@client.event
+async def on_message(message):
+    if message.content.startswith("안녕"):
+        await message.channel.send("반가워!")
+        
+     
+access_token = os.environ["BOT_TOKEN"]    
+client.run("")
